@@ -40,7 +40,7 @@ from setuptools import setup
 
 APP = ['MyApplication.py']
 DATA_FILES = []
-OPTIONS = {'argv_emulation': True}
+OPTIONS = {}
 
 setup(
     app=APP,
@@ -99,7 +99,7 @@ $ rm -rf build dist
 and next, build your application:
 
 ---------------------------------------
-$ python setup.py py2appd
+$ python setup.py py2app
 ---------------------------------------
 
 
@@ -133,7 +133,6 @@ Edit again the setup.py file and add the package that raised the error:
 -------------------------------------------------------------------------------------------
 
 OPTIONS = {
-    'argv_emulation': True,
     'packages': ['httplib2', 'requests', 'selenium']
     }
 
@@ -152,5 +151,32 @@ you can share it by copying the application bundle dist/application_name.
 That’s all! Hope it was useful!
 
 And please, don’t forget to share it with your friends, they might find it useful too 😉
+
+
+
+CREATE .PKG
+-------------------------------------------------------------------------------------------
+Pack to pkg:
+
+pkgbuild --component MyApp.app MyComponent.pkg
+
+
+Ceate .pkg:
+
+pkgbuild --component MyApp.app --install-location /Applications MyAppComponent.pkg
+
+
+Create Distribution .xml:
+
+productbuild --synthesize --package MyAppComponent.pkg Distribution.xml
+
+
+Create finall final product package:
+
+productbuild --distribution Distribution.xml --package-path ./ MyAppInstaller.pkg
+
+
+
+
 
 
